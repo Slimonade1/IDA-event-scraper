@@ -2,9 +2,11 @@
 
 Denne guide beskriver alle trin for at få IDA Watcher-programmet til at køre som en Windows-service.
 
+Programmet kører passivt som en baggrundsproces ved startup, og vil underrette dig via e-mail notifikation. Projektet har taget udgangspunkt i Gmail, men det er også muligt at bruger andre e-mail services.
+
 ---
 
-## ✅ 1. Dependencies
+## 1. Dependencies
 Programmet kræver:
 - **Node.js v18+** (fordi vi bruger global `fetch`)
 - **npm-pakker**:
@@ -15,7 +17,7 @@ Programmet kræver:
 
 ---
 
-## ✅ 2. Hent IDA_AUTH SiteKey
+## 2. Hent IDA_AUTH SiteKey
 For at hente events fra IDA via Cludo API skal du bruge en **SiteKey**.
 
 Sådan finder du den:
@@ -33,7 +35,7 @@ Sådan finder du den:
 
 ---
 
-## ✅ 3. Opret Gmail App Password
+## 3. Opret Gmail App Password
 For at sende e-mails via Gmail skal du bruge et **App Password** (kræver 2FA).
 
 Sådan gør du:
@@ -50,14 +52,14 @@ SMTP_HOST=smtp.gmail.com
 SMTP_PORT=465
 SMTP_SECURE=true
 SMTP_USER=din@gmail.com
-SMTP_PASS=<dit_app_password>
+!! SMTP_PASS=<dit_app_password> !! CHANGE THIS
 MAIL_FROM=din@gmail.com
 MAIL_TO=modtager@domæne.dk
 ```
 
 ---
 
-## ✅ 4. Installer NSSM (Non-Sucking Service Manager)
+## 4. Installer NSSM (Non-Sucking Service Manager)
 NSSM gør det muligt at køre Node.js-scriptet som en Windows-service.
 
 Sådan gør du:
@@ -82,7 +84,7 @@ Sådan gør du:
 
 ---
 
-## ✅ 5. Filstruktur
+## 5. Filstruktur
 Din mappe skal indeholde:
 ```
 IdaWatcher/
@@ -95,7 +97,7 @@ IdaWatcher/
 
 ---
 
-## ✅ 6. Test
+## 6. Test
 - Bekræft alt virker
   ```cmd
   node ida-watch-email.mjs --send -now
